@@ -1,4 +1,4 @@
-package GUI;
+package ViewClasses;
 
 public class MainView extends javax.swing.JFrame {
 

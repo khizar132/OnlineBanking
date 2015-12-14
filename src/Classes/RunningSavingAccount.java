@@ -6,6 +6,11 @@ public class RunningSavingAccount extends SavingAccount{
         super(AccountID, AccountNo, Balance);
     }
 
+    public RunningSavingAccount() {
+        super();
+        
+    } 
+
     @Override
     double getProfit(double amount) {
         if (amount>limit){

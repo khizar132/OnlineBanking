@@ -1,4 +1,4 @@
-package GUI;
+package ViewClasses;
 
 public class LoginView extends javax.swing.JFrame {
     String UserID, Pass;

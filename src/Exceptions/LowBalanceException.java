@@ -1,11 +1,11 @@
-package Classes;
+package Exceptions;
 
-class LowBalanceException extends Exception {
+public class LowBalanceException extends Exception {
     @Override
     public String getMessage(){
         return "Insufficient Balance. try again with another amount";
     }
-    public LowBalanceException(String msg) {
-        super(msg);
+    public LowBalanceException() {
+        super();
     }
 }

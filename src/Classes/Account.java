@@ -4,8 +4,10 @@ import java.io.Serializable;
 
 abstract class Account implements Serializable{
     private String AccountID, AccountNo;
-    protected double Balance;
-    
+    private double Balance;
+    Account(){
+        
+    }
     Account(String AccountID, String AccountNo, double Balance){
         this.AccountID = AccountID;
         this.AccountNo = AccountNo;
@@ -34,5 +36,8 @@ abstract class Account implements Serializable{
     
     void subBalance(double Amount)throws Exception{
         this.Balance -= Amount;
+    }
+    void setAccountNo(String No){
+        this.AccountNo=No;
     }
 }

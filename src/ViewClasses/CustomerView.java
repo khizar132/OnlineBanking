@@ -1,4 +1,4 @@
-package GUI;
+package ViewClasses;
 
 public class CustomerView extends javax.swing.JFrame {
 

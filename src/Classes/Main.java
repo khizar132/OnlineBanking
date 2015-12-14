@@ -1,9 +1,7 @@
 package Classes;
 
-import Exceptions.InvalidLoginException;
-import Exceptions.InvalidLoginIdException;
-import Exceptions.InvalidLoginPasswordException;
-import GUI.LoginView;
+import Exceptions.*;
+import ViewClasses.*;
 import java.io.*;
 import java.util.*;
 
@@ -15,6 +13,8 @@ public class Main {
     static int index=-1;
     static ArrayList<Account> accounts = new ArrayList<>();
     static Scanner cin = new Scanner (System.in);
+    static FundsTransferViews fViews = new FundsTransferViews();
+    static Account DestAcc;
     public static void main(String args[])throws Exception{
         setData();
         objData.saveAccountData(accounts);
@@ -23,7 +23,12 @@ public class Main {
         objData.retrieveAccountData();
         while (true){
             if (login()){
+                
                 System.out.println(accounts.get(index).getBalance());
+                FundsTransfer();
+                System.out.println(accounts.get(index).getBalance());
+                System.out.println(DestAcc.getBalance());
+                
             } 
         }
     }
@@ -40,6 +45,14 @@ public class Main {
             return true;
         }
         return false;
+    }
+    public static boolean validateDestAccount(String DestAccNo){
+        for (Account a: accounts){
+            if (a.getAccountNo().equals(DestAccNo)){
+                retrieveDestAccountData(accounts.indexOf(a));
+                return true;
+            }  
+        }return false;
     }
     public static void setData() throws LowBalanceException{
         accounts.add(new BusinessCurrentAccount("12345", "9876", 89222));
@@ -69,6 +82,41 @@ public class Main {
             return false;
         }
         return true;
+    }
+    public static void FundsTransfer() throws Exception{
+        String DestAccountNo="";double TransactionAmount = 0;
+        while (true){
+            try{
+                fViews.AskInfo();
+                DestAccountNo=fViews.getDestAccNo();
+                TransactionAmount=fViews.getAmount(); 
+                if (!validateDestAccount(DestAccountNo)){
+                    throw new InvalidAccountException();
+                }
+                else {
+                    Transaction.fundsTransfer(accounts.get(index), DestAcc, TransactionAmount);
+                    break;
+                }
+            }catch(InvalidAccountException e){
+                e.getMessage();
+            }
+        }
+    } 
+
+    private static void retrieveDestAccountData(int index) {
+        if(accounts.get(index) instanceof BusinessCurrentAccount){
+            DestAcc = new BusinessCurrentAccount();
+        }
+        if(accounts.get(index) instanceof PersonalCurrentAccount){
+            DestAcc = new PersonalCurrentAccount();
+        }
+        if(accounts.get(index) instanceof RunningSavingAccount){
+            DestAcc = new RunningSavingAccount();
+        }
+        if(accounts.get(index) instanceof FixDepositSavingAccount){
+            DestAcc = new FixDepositSavingAccount();
+        }
+        DestAcc=accounts.get(index);
     }
 }
     

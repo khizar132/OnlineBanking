@@ -4,7 +4,9 @@ import Exceptions.AmountCannotSubractException;
 
 public abstract class SavingAccount extends Account{
     double profit, limit=50000;
-    
+    public SavingAccount(){
+        super();
+    }
     public SavingAccount(String AccountID, String AccountNo, double Balance) {
         super(AccountID, AccountNo, Balance);
     }

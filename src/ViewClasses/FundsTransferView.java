@@ -1,4 +1,4 @@
-package GUI;
+package ViewClasses;
 
 public class FundsTransferView extends javax.swing.JFrame {
 

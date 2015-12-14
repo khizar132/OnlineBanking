@@ -6,6 +6,11 @@ public class FixDepositSavingAccount extends SavingAccount{
         super(AccountID, AccountNo, Balance);
     }
 
+    FixDepositSavingAccount() {
+        super();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     @Override
     double getProfit(double amount) {
         if (amount>limit){
